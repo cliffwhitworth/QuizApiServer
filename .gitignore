@@ -1,0 +1,9 @@
+.vs
+*.nupkg
+[Bb]in/
+[Oo]bj/
+/QuizApiServer/appsettings.*
+/QuizApiServer/internallog.txt
+/QuizApiServer/QuizApiServer.*
+/QuizApiServer/Startup.cs
+/QuizApiServer/Properties/launchSettings.json
