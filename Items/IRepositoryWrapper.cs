@@ -12,5 +12,6 @@ namespace Quizzes
         IUsersRepository Users { get; }
         IUserQuizRepository UserQuiz { get; }
         IQuizAttemptsRepository QuizAttempts { get; }
+        IQuizSettingsRepository QuizSettings { get; }
     }
 }

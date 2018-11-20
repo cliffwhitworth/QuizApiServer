@@ -16,5 +16,6 @@ namespace Entities
         public DbSet<Users> Users { get; set; }
         public DbSet<UserQuiz> UserQuiz { get; set; }
         public DbSet<QuizAttempts> QuizAttempts { get; set; }
+        public DbSet<QuizSettings> QuizSettings { get; set; }
     }
 }

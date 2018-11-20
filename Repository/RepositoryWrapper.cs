@@ -12,6 +12,20 @@ namespace Repository
         private IUsersRepository _users;
         private IUserQuizRepository _userquiz;
         private IQuizAttemptsRepository _quizattempts;
+        private IQuizSettingsRepository _quizsettings;
+
+        public IQuizSettingsRepository QuizSettings
+        {
+            get
+            {
+                if (_quizsettings == null)
+                {
+                    _quizsettings = new QuizSettingsRepository(_repoContext);
+                }
+
+                return _quizsettings;
+            }
+        }
 
         public IQuizAttemptsRepository QuizAttempts
         {

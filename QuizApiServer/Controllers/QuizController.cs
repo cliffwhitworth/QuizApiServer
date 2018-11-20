@@ -19,11 +19,13 @@ namespace QuizApiServer.Controllers
     {
         private ILoggerManager _logger;
         private IRepositoryWrapper _repoWrapper;
+        private RepositoryContext _db;
 
-        public QuizController(ILoggerManager logger, IRepositoryWrapper repoWrapper)
+        public QuizController(ILoggerManager logger, IRepositoryWrapper repoWrapper, RepositoryContext db)
         {
             _logger = logger;
             _repoWrapper = repoWrapper;
+            _db = db;
         }
 
         // GET api/quiz
@@ -42,10 +44,21 @@ namespace QuizApiServer.Controllers
 
         // GET api/quiz/user/8
         [HttpGet("user/{id}")]
-        public IEnumerable<UserQuiz> GetQuizzesByUser(int id)
+        public IEnumerable<QuizSettings> GetQuizzesByUser(int id)
         {
 
-            var quizzes = _repoWrapper.UserQuiz.FindByCondition(q => q.UserId.Equals(id));
+            var quizzes =
+                from quiz in _db.UserQuiz
+                join setting in _db.QuizSettings on quiz.SettingsId equals setting.Id
+                where quiz.UserId == id
+                select new QuizSettings { QuizId = quiz.QuizId,                                          
+                                          SettingsId = quiz.SettingsId,
+                                          UserId = quiz.UserId,
+                                          QuizName = setting.QuizName,
+                                          Open = setting.Open,
+                                          Close = setting.Close
+                                         };
+            // var quizzes = _repoWrapper.UserQuiz.FindByCondition(q => q.UserId.Equals(id));
 
             // Console.WriteLine("C# is cool");
             // Console.WriteLine(id);
